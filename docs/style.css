@@ -5,6 +5,8 @@ body {
   color: #fff;
   font-family: Arial, sans-serif;
   text-align: center;
+  overflow: hidden;
+  transition: background-color 1s;
 }
 
 h2 {
@@ -13,6 +15,23 @@ h2 {
 
 .controls {
   margin-top: 10px;
+}
+
+/* 隱藏預設檔案名稱 */
+input[type="file"] {
+  display: none;
+}
+
+.file-label {
+  padding: 5px 12px;
+  background: #444;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.file-label:hover {
+  background: #666;
 }
 
 button {
