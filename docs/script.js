@@ -2,6 +2,7 @@ const fileInput = document.getElementById("audioInput");
 const audioPlayer = document.getElementById("audioPlayer");
 const playBtn = document.getElementById("playBtn");
 const pauseBtn = document.getElementById("pauseBtn");
+const musicNameDiv = document.getElementById("musicName");
 
 const canvas = document.getElementById("visualizer");
 const ctx = canvas.getContext("2d");
@@ -46,7 +47,9 @@ fileInput.addEventListener("change", () => {
   const url = URL.createObjectURL(file);
   audioPlayer.src = url;
 
-  musicName = file.name.replace(/\.[^/.]+$/, "");
+  musicName = file.name;
+  musicNameDiv.textContent = musicName;
+
   setupAudioNodes();
 });
 
@@ -60,6 +63,13 @@ pauseBtn.addEventListener("click", () => {
   audioPlayer.pause();
 });
 
+// 將秒數格式化 mm:ss
+function formatTime(seconds){
+  const m = Math.floor(seconds / 60).toString().padStart(2,'0');
+  const s = Math.floor(seconds % 60).toString().padStart(2,'0');
+  return `${m}:${s}`;
+}
+
 // 視覺化
 function visualize() {
   requestAnimationFrame(visualize);
@@ -68,12 +78,12 @@ function visualize() {
 
   analyser.getByteFrequencyData(dataArray);
 
-  // 平均能量
+  // 平均能量 (對數縮放)
   let avg = dataArray.slice(0, 80).reduce((a,b)=>a+b,0)/80;
   avg = Math.sqrt(avg / 255) * 50; // 小聲音不動，大聲音放大
 
   // 背景全頁變色
-  bgHue += avg * 0.05; // 緩慢變化，眼睛舒適
+  bgHue += avg * 0.05;
   document.body.style.backgroundColor = `hsl(${bgHue%360},40%,10%)`;
 
   ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -112,16 +122,13 @@ function visualize() {
     ctx.stroke();
   }
 
-  // 中央音樂名稱，長度過長自動縮短
-  let displayName = musicName;
-  const maxChars = 20;
-  if(displayName.length > maxChars){
-    displayName = displayName.slice(0, maxChars-3) + "...";
-  }
+  // 中央顯示播放時間 / 總時長
+  let current = formatTime(audioPlayer.currentTime);
+  let total = formatTime(audioPlayer.duration || 0);
   ctx.fillStyle = "white";
   ctx.font = "22px Arial";
   ctx.textAlign = "center";
-  ctx.fillText(displayName, centerX, centerY+8);
+  ctx.fillText(`${current} / ${total}`, centerX, centerY+8);
 }
 
 visualize();

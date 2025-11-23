@@ -53,3 +53,10 @@ button:hover {
   display: block;
   margin-top: 20px;
 }
+
+#musicName {
+  margin-top: 10px;
+  font-size: 18px;
+  color: white;
+  word-break: break-all;
+}
