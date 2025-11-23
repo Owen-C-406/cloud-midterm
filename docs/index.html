@@ -3,16 +3,26 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Music Visualizer</title>
+  <title>Advanced Music Visualizer</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <h2>Music Visualizer (Basic Version)</h2>
+  <h2>Music Visualizer (Enhanced Version)</h2>
 
-  <input type="file" id="audioInput" accept="audio/*">
+  <div class="controls">
+    <input type="file" id="audioInput" accept="audio/*">
+
+    <input type="text" id="urlInput" placeholder="輸入 MP3 網址 (非 YouTube)">
+    <button id="loadUrlBtn">載入音樂</button>
+
+    <button id="playBtn">播放</button>
+    <button id="pauseBtn">暫停</button>
+  </div>
 
   <canvas id="visualizer"></canvas>
+
+  <audio id="audioPlayer" crossorigin="anonymous"></audio>
 
   <script src="script.js"></script>
 </body>
