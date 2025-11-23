@@ -26,10 +26,7 @@
 
 ## 🚀 使用方式
 
-部署於 Github Pages，請直接訪問:
-```
-https://owen-c-406.github.io/cloud-midterm/
-```
+部署於 Github Pages，請直接訪問: https://owen-c-406.github.io/cloud-midterm/
 
 ---
 
