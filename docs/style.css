@@ -6,7 +6,7 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
   overflow: hidden;
-  transition: background-color 1s;
+  transition: background-color 1s linear;
 }
 
 h2 {
@@ -17,9 +17,8 @@ h2 {
   margin-top: 10px;
 }
 
-/* 隱藏預設檔案名稱 */
 input[type="file"] {
-  display: none;
+  display: none; /* 隱藏預設檔案名稱 */
 }
 
 .file-label {
